@@ -16,7 +16,12 @@ function pruebas(req, res){
 // CRUD a la tabla:
 function guardar(req, res) {
     // Entradas del formulario:
-    const { usuario, contrasena, nombre, cedula, email, administrador } = req.body;
+    var { usuario, contrasena, nombre, cedula, email, administrador } = req.body;
+    if (!administrador) {
+        administrador = 0;
+    }else {
+        administrador = administrador;
+    }
     // Capturaremos estas variables para pasarsela al nuevo usuario:
     const NewUser = { usuario, contrasena, nombre, cedula, email, administrador }
     // Ejecutamos la consulta en la base de datos
@@ -62,6 +67,7 @@ function getRol(req, res){
         return res.status(200).send({ Usuarios: role });
     });
 }
+// Función para buscar por fechas
 function getDate(req, res){
     // Constante con el que capturamos el parametro rol:
     const fecha = req.params.fecha;
@@ -72,6 +78,8 @@ function getDate(req, res){
         return res.status(200).send({ Usuarios: cronos });
     });
 }
+// Otras funciones: ..
+
 /* --------------------------------------------------------------------- */
 // Exportamos las funciones del control:
 module.exports = {
