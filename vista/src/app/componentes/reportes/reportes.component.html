@@ -1,2 +1,35 @@
-<p>reportes works!</p>
-Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam officiis aliquam, necessitatibus minima iste itaque aspernatur, beatae quas quos cumque repudiandae similique odit sapiente, natus unde repellat possimus sequi! Sit.
+<section class="container-fluid">
+    <div class="row">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark table-hover">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Número de Cédula</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Contraseña</th>
+                        <th scope="col">Fecha de Creación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ usuarios }}
+                    <tr *ngFor="let user of usuarios">
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                        <td class="text-center">{{ user }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+
+    </div>
+</section>

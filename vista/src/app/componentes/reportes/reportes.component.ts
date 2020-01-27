@@ -12,6 +12,9 @@ import { LoginService } from '../../servicios/user.service';
   styleUrls: ['./reportes.component.css']
 })
 export class ReportesComponent implements OnInit {
+    // Variables de la clase:
+    public perfil;
+    public usuarios;
     // variable de interfaz para capturar los datos del formulario:
     user:User = {
       usuario:"",
@@ -29,6 +32,22 @@ export class ReportesComponent implements OnInit {
    }
 
   ngOnInit() {
+    // Manejo de Sessiones:
+    this.perfil = this._loginService.getSession();
+    console.log(this.perfil);
+    this.getUsers();
+  }
+
+  getUsers() {
+    this._loginService.getUsers().subscribe( res =>{
+      if (res) {
+        this.usuarios = res;
+        console.log(this.usuarios);
+      } else {
+        console.log('no se puede observar ningun usuario en la base de datos');
+      }
+    }
+    );
   }
   
 

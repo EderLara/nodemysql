@@ -56,6 +56,7 @@ export class InicioComponent implements OnInit {
         localStorage.setItem('usuario', JSON.stringify(this.perfil));
         // Almacenamos el tipo de perfil:
         this.tipouser = this.perfil.Administrador;
+        this._loginService.getRol(this.tipouser);
         console.log(this.perfil);
         console.log(this.tipouser);
       } else { 
@@ -64,9 +65,11 @@ export class InicioComponent implements OnInit {
       // Despues de obtener respuesta del back, navegar a la página siguiente:
       switch (this.tipouser) {
         case '1':
+          return this.perfil;
           console.log('Usuario Administrador');
           break;
         case '0':
+          return this.perfil;
           console.log('Usuario Administrador');
           break;
 

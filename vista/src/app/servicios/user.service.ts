@@ -11,6 +11,7 @@ import { User } from '../interface/user.interface';
 export class LoginService{
     // Variables globales de la clase loginService:
     public url: string;
+    public headers;
     public role;
     public perfil;
     // Constructor del servicio:
@@ -20,6 +21,7 @@ export class LoginService{
     ){
         // Dentro del constructor, pasamos la url de la api, puesto que es allí donde se ejecutan los controles:
         this.url = GLOBAL.url;
+        this.headers = new HttpHeaders().set('Content-Type','application/json');
     }
     // ----------------- Funciones de test.service:  ----------------- \\
     //  Función de login:
@@ -27,14 +29,27 @@ export class LoginService{
         let params = JSON.stringify(usuario);
         console.log(params);
         console.log(this.url);
-        let headers = new HttpHeaders().set('Content-Type','application/json');
-        return this._http.post(this.url+'/ingreso', params, {headers: headers});                        
+        return this._http.post(this.url+'/ingreso', params, {headers: this.headers});                        
     }
     // Registro de usuario:
     registro(usuario: User): Observable<any>{
         let params = JSON.stringify(usuario);
         console.log(this.url);
-        let headers = new HttpHeaders().set('Content-Type','application/json');
-        return this._http.post(this.url+'/guardar', params, {headers: headers});    
+        return this._http.post(this.url+'/guardar', params, { headers: this.headers});    
+    }
+    // Perfil de usuario:
+    getRol(rol: any): Observable<any> {
+        if (rol) {
+            return this.role = rol;
+        } else {
+            return this.role = null;
+        }
+    }
+    getSession(){
+        return this.role;
+    }
+    // Listar todos los usuarios:
+    getUsers(){
+        return this._http.get(this.url+'/listar', {headers: this.headers});
     }
 }
