@@ -41,6 +41,7 @@ export class InicioComponent implements OnInit {
    }
 
   ngOnInit() {
+  
   }
   // Funciones de login:
   ingreso(data): void {

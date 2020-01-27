@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // Librerias para el manejo de formularios:
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+// Importamos la interfaz:
+import { User } from '../../interface/user.interface';
+// Importamos los servicios:
+import { LoginService } from '../../servicios/user.service';
 
 @Component({
   selector: 'app-registro',
@@ -10,24 +13,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistroComponent implements OnInit {
   // Variables del sistema:
-  // Para capturar los datos del formulario:
-  regUser: FormGroup;
+  public userNew;
+  public status;
+  // variable de interfaz para capturar los datos del formulario:
+  user:User = {
+      usuario:"",
+      contrasena:"",
+      nombre:"",
+      cedula:"",
+      email:"",
+      administrador:0
+  }
   public registroimg;
   public description;
   constructor(
     // Configuramos variables privadas para el acceso de router:
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _loginService: LoginService
   ) { 
-    // Constructor de formulario para registro de usuario:
-    this.regUser = new FormGroup({
-      'usuario': new FormControl('', Validators.required),
-      'contrasena': new FormControl('', Validators.required),
-      'nombre': new FormControl('', Validators.required),
-      'cedula': new FormControl('', Validators.required),
-      'email': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
-      'administrador': new FormControl('', Validators.required),
-    });
     // Variables de la vista:
     this.registroimg = 'assets/pictures/ok.png';
     this.description = 'lorem ipsum';
@@ -36,7 +40,17 @@ export class RegistroComponent implements OnInit {
   ngOnInit() {
   }
   // Funcion para registro de usuario:
-  regUsuario(){
-    console.log( this.regUser.value );
+  regUsuario(usuario): void{
+    this.userNew = usuario.value;
+    console.log(this.userNew);
+    this._loginService.registro(this.userNew).subscribe( res =>{
+      if (res) {
+        this.status = 'Usuario Almacenado';
+        this._router.navigate(['/login']);
+      }else {
+        this.status = 'Error';
+      }
+      console.log(this.status);
+    });
   }
 }

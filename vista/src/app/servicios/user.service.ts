@@ -30,16 +30,11 @@ export class LoginService{
         let headers = new HttpHeaders().set('Content-Type','application/json');
         return this._http.post(this.url+'/ingreso', params, {headers: headers});                        
     }
-    // Función de Identifación de Rol:
-    getRol() {
-        let role =JSON.parse(localStorage.getItem('Usuario'));
-        if (role != undefined) {
-            this.role = role;
-            this.perfil = this.role.administrador;
-            console.log(this.perfil);
-        }else {
-            this.role = null;
-        }
-        return this.role;
+    // Registro de usuario:
+    registro(usuario: User): Observable<any>{
+        let params = JSON.stringify(usuario);
+        console.log(this.url);
+        let headers = new HttpHeaders().set('Content-Type','application/json');
+        return this._http.post(this.url+'/guardar', params, {headers: headers});    
     }
 }

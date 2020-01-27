@@ -13,31 +13,31 @@
       <h2 class="text-primary mb-5"><b>Registrate Como Usuario</b></h2>
       
       <!-- Agregamos a la etiqueta form, las propiedades para capturar los datos -->
-      <form class="mt-5" [formGroup]="regUser" (ngSubmit)="regUsuario()">
+      <form class="mt-5" #RegForm="ngForm" (ngSubmit)="regUsuario(RegForm)">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="usuario">Usuario</label>
-            <input type="text" formControlName="usuario" placeholder="NickName de Ingreso" class="form-control">
+            <input autofocus type="text" name="usuario" #usuario="ngModel" [(ngModel)]="user.usuario" placeholder="NickName de Ingreso" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="contrasena">Contraseña</label>
-            <input type="password" formControlName="contrasena" class="form-control">
+            <input type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="user.contrasena" placeholder="Contraseña de ingreso" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="nombre">Nombre</label>
-            <input type="text" formControlName="nombre" class="form-control">
+            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="user.nombre" placeholder="Nombres y Apellidos Completos" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="cedula">Cédula</label>
-            <input type="text" formControlName="cedula" class="form-control">
+            <input type="text" name="cedula" #cedula="ngModel" [(ngModel)]="user.cedula" placeholder="Número de Cédula" class="form-control">
           </div>
           <div class="form-group col-md-8">
             <label for="email">Email</label>
-            <input type="email" formControlName="email" class="form-control" id="email">
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Correo Electrónico" class="form-control" id="email">
           </div>
           <div class="form-group col-md-4" *ngIf='rol'>
             <label for="rolUser">Rol de Usuario</label>
-            <input type="text" formControlName="rolUser" class="form-control" placeholder="Administrador">
+            <input type="text" name="administrador" #rolUser="ngModel" [(ngModel)]="user.administrador" class="form-control" placeholder="Administrador">
           </div>
         </div>
         <div class="col-md-12 row justify-content-between">
