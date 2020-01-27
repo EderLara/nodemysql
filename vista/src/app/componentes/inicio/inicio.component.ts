@@ -17,7 +17,8 @@ export class InicioComponent implements OnInit {
   public imglogin;
   public year = new Date();
   public role;
-  public usuario;
+  public perfil;
+  public tipouser;
   public session;
 
   // variable de interfaz para capturar los datos del formulario:
@@ -43,20 +44,37 @@ export class InicioComponent implements OnInit {
   }
   // Funciones de login:
   ingreso(data): void {
-    // Mostramos en consola que valores obtenemos:
-    // console.log(this.logForm.value);
     // Pasamos los valores del formulario al servicio:
-  
-    this._loginService.login(data.value).subscribe( res =>{
-      this.role = res.usuario;
-      console.log(this.role);
-      if (!this.role) {
-        this.session = 'Error de Sessión';
-      } else {
+    this.role = data.value;
+    this._loginService.login(this.role).subscribe( res =>{
+
+      if (res.Usuario) {
+        this.perfil = res.Usuario;
         this.session = 'logueado';
-        localStorage.setItem('usuario', JSON.stringify(this.role));
-        console.log(this.session);
+        // Almacenamos en el dispositivo los datos obtenidos:
+        localStorage.setItem('usuario', JSON.stringify(this.perfil));
+        // Almacenamos el tipo de perfil:
+        this.tipouser = this.perfil.Administrador;
+        console.log(this.perfil);
+        console.log(this.tipouser);
+      } else { 
+        this.session = 'Error de Sessión';
       }
+      // Despues de obtener respuesta del back, navegar a la página siguiente:
+      switch (this.tipouser) {
+        case '1':
+          console.log('Usuario Administrador');
+          break;
+        case '0':
+          console.log('Usuario Administrador');
+          break;
+
+        default:
+          console.log(this.session);
+          break;
+      }
+      // Ya capturado podemos navegar a la página de reportes y realizar las operaciones según l usuario:
+      this._router.navigate(['/reportes']);
     },
     error =>{
       let errMsg = <any>error;
@@ -65,5 +83,7 @@ export class InicioComponent implements OnInit {
         this.session = 'Error de suscripción';
       }
     });
+    this.session = 'Error';
+    console.log(this.session);
   }
 }

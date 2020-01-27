@@ -1,16 +1,19 @@
 <form #LoginForm="ngForm" (ngSubmit)="ingreso(LoginForm)" class="form-signin">
+    <div class="col-sm-12 text-center bg-danger text-warning" *ngIf="session== 'Error'">
+      Usuario y/o Contraseña incorrectos
+    </div>
     <div class="text-center mb-4">
       <img class="mb-4" src="{{ imglogin }}" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Ingreso a NodeMySQL APP</h1>
     </div>
   
     <div class="form-label-group">
-      <input type="text" name="user" #user="ngModel" [(ngModel)]="user.usuario" class="form-control" placeholder="NickName" required autofocus>
+      <input type="text" name="usuario" #user="ngModel" [(ngModel)]="user.usuario" class="form-control" placeholder="NickName" required autofocus>
       <label for="inputEmail">Usuario</label>
     </div>
   
     <div class="form-label-group">
-      <input type="password" name="pass" #pass="ngModel" [(ngModel)]="user.contrasena" class="form-control" placeholder="Password" required>
+      <input type="password" name="contrasena" #pass="ngModel" [(ngModel)]="user.contrasena" class="form-control" placeholder="Password" required>
       <label for="inputPassword">Contraseña</label>
     </div>
   

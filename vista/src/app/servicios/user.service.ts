@@ -13,14 +13,6 @@ export class LoginService{
     public url: string;
     public role;
     public perfil;
-    // variable de interfaz:
-    user:User = {
-        usuario:"",
-        contrasena:"",
-        nombre:"",
-        cedula:"",
-        email:""
-    }
     // Constructor del servicio:
     constructor(
         // En el constructor vamos a pasar los métodos aceptados por el protocolo http, los ponemos en una variable para que podamos invocarlos en las funciones siguientes:
@@ -31,11 +23,12 @@ export class LoginService{
     }
     // ----------------- Funciones de test.service:  ----------------- \\
     //  Función de login:
-    login(usuario): Observable<any>{
+    login(usuario: User): Observable<any>{
         let params = JSON.stringify(usuario);
         console.log(params);
+        console.log(this.url);
         let headers = new HttpHeaders().set('Content-Type','application/json');
-        return this._http.post(this.url+'/ingreso', params, {headers: headers});
+        return this._http.post(this.url+'/ingreso', params, {headers: headers});                        
     }
     // Función de Identifación de Rol:
     getRol() {
