@@ -44,7 +44,7 @@ function login(req, res){
             const usuario = logger[0];
             // Luego capturamos la clave y la comparamos con la que existe en la base de datos:
             if (usuario.Contrasena === contrasena) {
-                return res.status(200).send({ Usuario: logger });
+                return res.status(200).send({ Usuario: usuario });
             }
         }       
     });

@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Aplicación NodeJS - MySQL';
+  logo = 'assets/pictures/ok.png'
 }

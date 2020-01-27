@@ -1,1 +1,50 @@
-<p>registro works!</p>
+<section class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2 class="text-center text-primary mt-2"><b>NodeMySQL | App</b></h2>
+      <img src="{{ registroimg }}" alt="" class="img-fluid mt-2 mb-3">
+      <h4 class="text-muted text-justify">
+        {{ description }}
+      </h4>
+      <p class="text-success">
+      </p>
+    </div>
+    <div class="col-md-8 mt-2 px-3">
+      <h2 class="text-primary mb-5"><b>Registrate Como Usuario</b></h2>
+      
+      <!-- Agregamos a la etiqueta form, las propiedades para capturar los datos -->
+      <form class="mt-5" [formGroup]="regUser" (ngSubmit)="regUsuario()">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="usuario">Usuario</label>
+            <input type="text" formControlName="usuario" placeholder="NickName de Ingreso" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" formControlName="contrasena" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cedula">Cédula</label>
+            <input type="text" formControlName="cedula" class="form-control">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email">
+          </div>
+          <div class="form-group col-md-4" *ngIf='rol'>
+            <label for="rolUser">Rol de Usuario</label>
+            <input type="text" formControlName="rolUser" class="form-control" placeholder="Administrador">
+          </div>
+        </div>
+        <div class="col-md-12 row justify-content-between">
+          <span></span>
+          <button type="submit" class="btn btn-primary mr-0">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
